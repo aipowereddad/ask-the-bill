@@ -21,7 +21,16 @@ function submitQuestion() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question }),
   })
-    .then((res) => res.json())
+    .then(async (res) => {
+      // Try standard JSON first
+      try {
+        return await res.json();
+      } catch (e) {
+        // Fallback: response came back as a JSON string
+        const txt = await res.text();
+        return JSON.parse(txt);
+      }
+    })
     .then((data) => {
       const raw = data.answer || "";
       const summaryMatch = raw.match(/### Summary\s*\n([\s\S]*?)(?=\n###|$)/);
@@ -36,10 +45,8 @@ function submitQuestion() {
             .split("\n")
             .filter((line) => line.startsWith("-"))
             .map((line) => {
-              const match = line.match(/- "([^"]+)"(?:[:：]\s*(.*))?/);
-              return match
-                ? { section: match[1], text: match[2] || "" }
-                : { section: "", text: line };
+              const m = line.match(/- \*\*?([^*]+?)\*\*?(?:[:：]\s*(.*))?/);
+              return m ? { section: m[1], text: m[2] || "" } : { section: "", text: line };
             })
         : [];
 
@@ -56,7 +63,8 @@ function submitQuestion() {
       document.getElementById("ind").innerHTML = bulletList(ind);
       document.getElementById("rep").innerHTML = bulletList(rep);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.error("Frontend parse error:", err);
       document.getElementById("summary").textContent = "Error retrieving answer.";
     });
 }
