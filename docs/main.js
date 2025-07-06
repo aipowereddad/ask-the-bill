@@ -24,23 +24,30 @@ function submitQuestion() {
     .then((res) => res.json())
     .then((data) => {
       const raw = data.answer || "";
-      const summary = raw.split("### Summary")[1]?.split("###")[0]?.trim() || "";
-      const quotesText = raw.split("### Key Quotes/Lines")[1]?.split("###")[0]?.trim() || "";
-      const quotes = quotesText
-        .split("\n")
-        .filter((line) => line.startsWith("-"))
-        .map((line) => {
-          const match = line.match(/- "([^"]+)"(?:[:：]\s*(.*))?/);
-          return match
-            ? { section: match[1], text: match[2] || "" }
-            : { section: "", text: line };
-        });
+      const summaryMatch = raw.match(/### Summary\s*\n([\s\S]*?)(?=\n###|$)/);
+      const quotesMatch = raw.match(/### Key Quotes(?:\/Lines)?\s*\n([\s\S]*?)(?=\n###|$)/);
+      const demMatch = raw.match(/\*\*Democratic\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
+      const indMatch = raw.match(/\*\*Independent\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
+      const repMatch = raw.match(/\*\*Republican\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
 
-      const dem = raw.split("**Democratic:**")[1]?.split("**Independent:**")[0]?.trim().split("\n").filter(Boolean) || [];
-      const ind = raw.split("**Independent:**")[1]?.split("**Republican:**")[0]?.trim().split("\n").filter(Boolean) || [];
-      const rep = raw.split("**Republican:**")[1]?.trim().split("\n").filter(Boolean) || [];
+      const summary = summaryMatch ? summaryMatch[1].trim() : "No summary available.";
+      const quotes = quotesMatch
+        ? quotesMatch[1]
+            .split("\n")
+            .filter((line) => line.startsWith("-"))
+            .map((line) => {
+              const match = line.match(/- "([^"]+)"(?:[:：]\s*(.*))?/);
+              return match
+                ? { section: match[1], text: match[2] || "" }
+                : { section: "", text: line };
+            })
+        : [];
 
-      document.getElementById("summary").textContent = summary || "No summary available.";
+      const dem = demMatch ? demMatch[1].trim().split("\n").filter(Boolean) : [];
+      const ind = indMatch ? indMatch[1].trim().split("\n").filter(Boolean) : [];
+      const rep = repMatch ? repMatch[1].trim().split("\n").filter(Boolean) : [];
+
+      document.getElementById("summary").textContent = summary;
       document.getElementById("quotesList").innerHTML = quotes
         .map((q) => `<li><strong>${q.section}:</strong> ${q.text}</li>`)
         .join("");
