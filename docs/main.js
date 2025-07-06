@@ -14,7 +14,7 @@ function submitQuestion() {
   document.querySelector(".response").classList.remove("hidden");
 
   // 🚨 Replace this URL with your actual n8n webhook once it’s ready
-  const webhookUrl = "https://your-n8n-webhook-url.com";
+  const webhookUrl = "https://aipowereddad2.app.n8n.cloud/webhook/ask-the-bill";
 
   fetch(webhookUrl, {
     method: "POST",
