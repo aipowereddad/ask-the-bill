@@ -23,14 +23,31 @@ function submitQuestion() {
   })
     .then((res) => res.json())
     .then((data) => {
-      document.getElementById("summary").textContent = data.summary || "No summary available.";
-      document.getElementById("quotesList").innerHTML = data.quotes
+      const raw = data.answer || "";
+      const summary = raw.split("### Summary")[1]?.split("###")[0]?.trim() || "";
+      const quotesText = raw.split("### Key Quotes/Lines")[1]?.split("###")[0]?.trim() || "";
+      const quotes = quotesText
+        .split("\n")
+        .filter((line) => line.startsWith("-"))
+        .map((line) => {
+          const match = line.match(/- "([^"]+)"(?:[:：]\s*(.*))?/);
+          return match
+            ? { section: match[1], text: match[2] || "" }
+            : { section: "", text: line };
+        });
+
+      const dem = raw.split("**Democratic:**")[1]?.split("**Independent:**")[0]?.trim().split("\n").filter(Boolean) || [];
+      const ind = raw.split("**Independent:**")[1]?.split("**Republican:**")[0]?.trim().split("\n").filter(Boolean) || [];
+      const rep = raw.split("**Republican:**")[1]?.trim().split("\n").filter(Boolean) || [];
+
+      document.getElementById("summary").textContent = summary || "No summary available.";
+      document.getElementById("quotesList").innerHTML = quotes
         .map((q) => `<li><strong>${q.section}:</strong> ${q.text}</li>`)
         .join("");
 
-      document.getElementById("dem").innerHTML = bulletList(data.democrat || []);
-      document.getElementById("ind").innerHTML = bulletList(data.independent || []);
-      document.getElementById("rep").innerHTML = bulletList(data.republican || []);
+      document.getElementById("dem").innerHTML = bulletList(dem);
+      document.getElementById("ind").innerHTML = bulletList(ind);
+      document.getElementById("rep").innerHTML = bulletList(rep);
     })
     .catch(() => {
       document.getElementById("summary").textContent = "Error retrieving answer.";
