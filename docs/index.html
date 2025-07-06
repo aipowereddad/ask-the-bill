@@ -1,0 +1,62 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask the Bill</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="banner">
+        <h1>Ask the Bill</h1>
+        <p class="tagline">Citizens of a democracy deserve to understand what their politicians are writing and passing into law.</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="context">
+        <label class="bill-label">Selected Bill: H.R.1 – March 2025</label>
+        <input
+          type="text"
+          id="questionInput"
+          placeholder="Is the headline 'This bill cuts federal support' accurate?"
+        />
+        <button onclick="submitQuestion()">Ask the Bill</button>
+      </div>
+
+      <div id="responseBox" class="response hidden">
+        <h2>🔍 Question</h2>
+        <p id="userQuestion"></p>
+
+        <h2>🧠 Summary</h2>
+        <p id="summary"></p>
+
+        <h2>📜 Relevant Bill Excerpts</h2>
+        <ul id="quotesList"></ul>
+
+        <h2>🗳️ Party Interpretations</h2>
+        <div class="tabs">
+          <button class="tab-button active" onclick="showTab('dem')">🔵 Democrat</button>
+          <button class="tab-button" onclick="showTab('ind')">🟢 Independent</button>
+          <button class="tab-button" onclick="showTab('rep')">🔴 Republican</button>
+        </div>
+
+        <div class="tab-content">
+          <div id="dem" class="tab-section active"></div>
+          <div id="ind" class="tab-section"></div>
+          <div id="rep" class="tab-section"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>This is an AI-powered tool that analyzes massive bills to give you direct answers, excerpts, and interpretations — so you can verify if the headlines you read are actually true.</p>
+      <p class="powered">Powered by OpenAI + n8n | Public Demo | Not Legal Advice</p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
