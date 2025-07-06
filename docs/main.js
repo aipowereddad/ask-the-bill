@@ -25,10 +25,10 @@ function submitQuestion() {
     .then((data) => {
       const raw = data.answer || "";
       const summaryMatch = raw.match(/### Summary\s*\n([\s\S]*?)(?=\n###|$)/);
-      const quotesMatch = raw.match(/### Key Quotes(?:\/Lines)?\s*\n([\s\S]*?)(?=\n###|$)/);
-      const demMatch = raw.match(/\*\*Democratic\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
-      const indMatch = raw.match(/\*\*Independent\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
-      const repMatch = raw.match(/\*\*Republican\*\*:\s*([\s\S]*?)(?=\n\s*\*\*|$)/);
+      const quotesMatch = raw.match(/### Key Quotes(?:\/Lines| or Lines)?\s*\n([\s\S]*?)(?=\n###|$)/);
+      const demMatch = raw.match(/\*\*?Democratic Perspective:?\*\*?\s*([\s\S]*?)(?=\n\s*\*\*?[^*]|$)/);
+      const indMatch = raw.match(/\*\*?Independent Perspective:?\*\*?\s*([\s\S]*?)(?=\n\s*\*\*?[^*]|$)/);
+      const repMatch = raw.match(/\*\*?Republican Perspective:?\*\*?\s*([\s\S]*?)(?=\n\s*\*\*?[^*]|$)/);
 
       const summary = summaryMatch ? summaryMatch[1].trim() : "No summary available.";
       const quotes = quotesMatch
