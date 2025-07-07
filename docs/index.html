@@ -16,11 +16,18 @@
 
     <main>
       <div class="context">
-        <label class="bill-label">Selected Bill: H.R.1 – March 2025</label>
+        <div class="bill-picker">
+          <label for="billSelect">Select Bill:</label>
+          <select id="billSelect" class="bill-select">
+            <option value="hr1" selected>H.R.1 – March 2025</option>
+            <!-- Future bills can be added here -->
+          </select>
+          <span id="billDesc" class="bill-desc">“Big Beautiful Bill” omnibus spending package</span>
+        </div>
         <input
           type="text"
           id="questionInput"
-          placeholder="Is the headline 'This bill cuts federal support' accurate?"
+          placeholder="Ask a question about the selected bill..."
         />
         <button onclick="submitQuestion()">Ask the Bill</button>
       </div>
