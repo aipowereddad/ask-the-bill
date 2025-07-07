@@ -116,3 +116,9 @@ footer {
   font-style: italic;
   margin-top: 0.5rem;
 }
+
+/* Ensure party tab buttons use black text for better readability */
+.tab-button,
+.tab-button.active {
+  color: #000;
+}
