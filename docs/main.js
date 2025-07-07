@@ -5,24 +5,51 @@ function submitQuestion() {
   // Simple mock knowledge base
   const mockAnswers = [
     {
-      match: /85|shuttle|space ?craft|houston/i,
+      match: /400|85|shuttle|space ?craft|houston/i,
       data: {
-        summary:
-          "Yes. The bill allocates **$85 million** to relocate a retired space shuttle to Houston—at least **$5 million** for transport and the remainder for a display facility at Johnson Space Center.",
+        summary: `
+Not quite. The bill does not allocate **$400 million** solely to move a space shuttle to Houston.  
+
+**What it actually does:**  
+• **≥ $5 million** required to transport the shuttle  
+• **$80 million** to build a facility at Johnson Space Center  
+• **$300 million** for broader JSC infrastructure upgrades  
+
+Total related to the shuttle move/display: **$85 million**.  
+The headline’s $400 million claim lumps the $300 million JSC upgrade with the shuttle line‑item and rounds up. Only about 22 % of that total is tied to the shuttle project.
+
+The same section also puts **$1 billion** toward infrastructure at other NASA centers, taking NASA facility enhancements past **$1.2 billion**.
+
+_No cost‑benefit analysis is provided in the bill for the $5 million transport minimum or the $80 million facility cost._
+        `.trim(),
         quotes: [
-          { section: "Sec. 50312", text: "Not more than $5,000,000 shall be made available for the safe transport of the space vehicle…" },
-          { section: "Sec. 50315", text: "$80,000,000 is designated for construction of a facility to house the space vehicle in Houston, Texas." }
+          {
+            section: "Sec. 40005(a)(6)(F)",
+            text: "“$85,000,000 shall be obligated… of which not less than $5,000,000 shall be obligated for the transportation of the space vehicle… with the remainder… for the purpose of construction of a facility to house the space vehicle.”"
+          },
+          {
+            section: "Sec. 40005(a)(6)(C)",
+            text: "“$300,000,000 shall be obligated… at the Lyndon B. Johnson Space Center…”"
+          },
+          {
+            section: "Sec. 40005(a)(6)",
+            text: "“$1,000,000,000 for infrastructure improvements at the manned spaceflight centers of the Administration…”"
+          }
         ],
         democrat: [
-          "Supports STEM tourism and public access to space‑history artifacts.",
-          "Sees it as an investment in local education and jobs."
-        ],
-        independent: [
-          "Generally supports preserving national heritage.",
-          "Wants cost transparency and clear timelines."
+          "Sees it as a smart investment in science education and national pride.",
+          "Believes the new facility can spark STEM interest in underserved communities.",
+          "Views public funding for iconic infrastructure as consistent with NASA’s mission."
         ],
         republican: [
-          "Typically critiques large spending, but GOP sponsors backed this since it benefits Texas and honors NASA’s legacy."
+          "Criticizes vague language like “not less than,” which can invite overspending.",
+          "Argues federal dollars should prioritize active missions, not museum displays.",
+          "Prefers shuttle displays funded by local or private sources."
+        ],
+        independent: [
+          "Supports preserving space history but is concerned about transparency.",
+          "Notes no evidence to justify $80 M for a facility or $5 M for transport.",
+          "Wants clearer accountability and public reporting before money is spent."
         ]
       }
     },
