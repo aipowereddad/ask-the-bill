@@ -10,7 +10,7 @@ function submitQuestion() {
         summary: `
 <p>Not quite. The bill does <strong>not</strong> allocate <strong>$400&nbsp;million</strong> solely to move a space shuttle to Houston. According to the bill text:</p>
 <ul>
-  <li><strong>&ge; $5&nbsp;million</strong> for transporting the shuttle</li>
+  <li><strong>Not less than $5&nbsp;million</strong> for transporting the shuttle</li>
   <li><strong>$80&nbsp;million</strong> to build a facility at Johnson Space Center</li>
   <li>Total: <strong>$85&nbsp;million</strong> tied directly to relocation & display</li>
   <li><strong>$300&nbsp;million</strong> more for broader JSC infrastructure (unrelated to the shuttle)</li>
@@ -90,15 +90,18 @@ function submitQuestion() {
     .map((q) => `<li><strong>${q.section}:</strong> ${q.text}</li>`)
     .join("");
 
-  document.getElementById("dem").innerHTML = bulletList(data.democrat);
-  document.getElementById("ind").innerHTML = bulletList(data.independent);
-  document.getElementById("rep").innerHTML = bulletList(data.republican);
+  document.getElementById("dem").innerHTML = bulletList(data.democrat, "Democratic");
+  document.getElementById("ind").innerHTML = bulletList(data.independent, "Independent");
+  document.getElementById("rep").innerHTML = bulletList(data.republican, "Republican");
 
   document.querySelector(".response").classList.remove("hidden");
 }
 
-function bulletList(arr) {
-  return "<ul>" + arr.map((item) => `<li>${item}</li>`).join("") + "</ul>";
+function bulletList(arr, label) {
+  if (!arr.length) return "<p>No commentary available.</p>";
+  return `<p class="party-note"><em>Likely perspective (${label}):</em></p><ul>` +
+    arr.map((item) => `<li>${item}</li>`).join("") +
+    "</ul>";
 }
 
 function showTab(id) {
