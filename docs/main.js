@@ -8,13 +8,16 @@ function submitQuestion() {
       match: /400|85|shuttle|space ?craft|houston/i,
       data: {
         summary: `
-Not quite. The bill does not allocate **$400 million** solely to move a space shuttle to Houston. According to the bill text, **at least $5 million** is required to transport the shuttle and **$80 million** is designated to build a facility at Johnson Space Center—**$85 million** total for relocation and display. **Separately, $300 million** is appropriated to Johnson Space Center for broader infrastructure upgrades. So while the combined figure is **$385 million**, it’s inaccurate to say it’s all for the shuttle.
-
-The \$400 million headline likely comes from rounding up and blending those two budget lines. In reality, only about **22 %** of that total is tied directly to the shuttle project.
-
-The bill also includes **\$1 billion** for infrastructure at other NASA facilities (Kennedy, Stennis, Marshall, Michoud), bringing NASA‑wide facility enhancements above **\$1.2 billion**.
-
-_No cost‑benefit analysis or justification is provided in the bill for the \$5 million transport minimum or the \$80 million facility cost._
+<p>Not quite. The bill does <strong>not</strong> allocate <strong>$400&nbsp;million</strong> solely to move a space shuttle to Houston. According to the bill text:</p>
+<ul>
+  <li><strong>&ge; $5&nbsp;million</strong> for transporting the shuttle</li>
+  <li><strong>$80&nbsp;million</strong> to build a facility at Johnson Space Center</li>
+  <li>Total: <strong>$85&nbsp;million</strong> tied directly to relocation & display</li>
+  <li><strong>$300&nbsp;million</strong> more for broader JSC infrastructure (unrelated to the shuttle)</li>
+</ul>
+<p>That combined <strong>$385&nbsp;million</strong> figure is often rounded to $400&nbsp;million, but only about <strong>22&nbsp;%</strong> is actually tied to the shuttle project.</p>
+<p>The bill also appropriates <strong>$1&nbsp;billion</strong> for infrastructure at other NASA facilities (Kennedy, Stennis, Marshall, Michoud), pushing total NASA facility enhancements above <strong>$1.2&nbsp;billion</strong>.</p>
+<p><em>No cost-benefit analysis or justification is provided in the bill for the $5&nbsp;million transport minimum or the $80&nbsp;million facility cost.</em></p>
 `.trim(),
         quotes: [
           {
