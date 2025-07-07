@@ -8,20 +8,13 @@ function submitQuestion() {
       match: /400|85|shuttle|space ?craft|houston/i,
       data: {
         summary: `
-Not quite. The bill does **not** allocate \`$400 million\` solely to move a space shuttle to Houston.
+Not quite. The bill does not allocate **$400 million** solely to move a space shuttle to Houston. According to the bill text, **at least $5 million** is required to transport the shuttle and **$80 million** is designated to build a facility at Johnson Space Center—**$85 million** total for relocation and display. **Separately, $300 million** is appropriated to Johnson Space Center for broader infrastructure upgrades. So while the combined figure is **$385 million**, it’s inaccurate to say it’s all for the shuttle.
 
-**What it actually does**  
-- **≥ $5 million** required to transport the shuttle  
-- **$80 million** to build a facility at Johnson Space Center  
-- **Total $85 million** for relocation + display  
-- **$300 million** more for wider JSC upgrades  
-- Combined **$385 million** often rounded up to $400 million
+The \$400 million headline likely comes from rounding up and blending those two budget lines. In reality, only about **22 %** of that total is tied directly to the shuttle project.
 
-Only ~22 % of that total is tied directly to the shuttle project.
+The bill also includes **\$1 billion** for infrastructure at other NASA facilities (Kennedy, Stennis, Marshall, Michoud), bringing NASA‑wide facility enhancements above **\$1.2 billion**.
 
-The same section also includes **$1 billion** for other NASA centers, taking facility enhancements past **$1.2 billion**.
-
-⚠️ *No cost‑benefit analysis is provided for the \$5 million transport line or the \$80 million facility cost.*
+_No cost‑benefit analysis or justification is provided in the bill for the \$5 million transport minimum or the \$80 million facility cost._
 `.trim(),
         quotes: [
           {
